@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>None</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 10;
+            height: 10;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Root", "label": "Root", "shape": "dot", "size": 10}, {"id": "feature 3 \u003c= 475.5", "label": "feature 3 \u003c= 475.5", "shape": "dot", "size": 10}, {"id": "feature 3 \u003e 475.5", "label": "feature 3 \u003e 475.5", "shape": "dot", "size": 10}, {"id": "feature 5 \u003c= 16.0", "label": "feature 5 \u003c= 16.0", "shape": "dot", "size": 10}, {"id": "feature 5 \u003e 16.0", "label": "feature 5 \u003e 16.0", "shape": "dot", "size": 10}, {"id": "feature 0 \u003c= 60.5", "label": "feature 0 \u003c= 60.5", "shape": "dot", "size": 10}, {"id": "feature 0 \u003e 60.5", "label": "feature 0 \u003e 60.5", "shape": "dot", "size": 10}, {"id": "Predict: 0.0", "label": "Predict: 0.0", "shape": "dot", "size": 10}, {"id": "feature 3 \u003c= 122.5", "label": "feature 3 \u003c= 122.5", "shape": "dot", "size": 10}, {"id": "feature 3 \u003e 122.5", "label": "feature 3 \u003e 122.5", "shape": "dot", "size": 10}, {"id": "Predict: 1.0", "label": "Predict: 1.0", "shape": "dot", "size": 10}, {"id": "feature 3 \u003c= 205.5", "label": "feature 3 \u003c= 205.5", "shape": "dot", "size": 10}, {"id": "feature 3 \u003e 205.5", "label": "feature 3 \u003e 205.5", "shape": "dot", "size": 10}, {"id": "feature 3 \u003c= 159.5", "label": "feature 3 \u003c= 159.5", "shape": "dot", "size": 10}, {"id": "feature 3 \u003e 159.5", "label": "feature 3 \u003e 159.5", "shape": "dot", "size": 10}, {"id": "feature 5 \u003c= 192.5", "label": "feature 5 \u003c= 192.5", "shape": "dot", "size": 10}, {"id": "feature 5 \u003e 192.5", "label": "feature 5 \u003e 192.5", "shape": "dot", "size": 10}, {"id": "feature 5 \u003c= 97.5", "label": "feature 5 \u003c= 97.5", "shape": "dot", "size": 10}, {"id": "feature 5 \u003e 97.5", "label": "feature 5 \u003e 97.5", "shape": "dot", "size": 10}, {"id": "feature 0 \u003c= 58.5", "label": "feature 0 \u003c= 58.5", "shape": "dot", "size": 10}, {"id": "feature 0 \u003e 58.5", "label": "feature 0 \u003e 58.5", "shape": "dot", "size": 10}, {"id": "feature 3 \u003c= 679.0", "label": "feature 3 \u003c= 679.0", "shape": "dot", "size": 10}, {"id": "feature 3 \u003e 679.0", "label": "feature 3 \u003e 679.0", "shape": "dot", "size": 10}, {"id": "feature 5 \u003c= 8.5", "label": "feature 5 \u003c= 8.5", "shape": "dot", "size": 10}, {"id": "feature 5 \u003e 8.5", "label": "feature 5 \u003e 8.5", "shape": "dot", "size": 10}, {"id": "feature 3 \u003c= 900.0", "label": "feature 3 \u003c= 900.0", "shape": "dot", "size": 10}, {"id": "feature 3 \u003e 900.0", "label": "feature 3 \u003e 900.0", "shape": "dot", "size": 10}, {"id": "feature 5 \u003c= 2.5", "label": "feature 5 \u003c= 2.5", "shape": "dot", "size": 10}, {"id": "feature 5 \u003e 2.5", "label": "feature 5 \u003e 2.5", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "Root", "to": "feature 3 \u003c= 475.5", "weight": 1}, {"from": "Root", "to": "feature 3 \u003e 475.5", "weight": 1}, {"from": "feature 3 \u003c= 475.5", "to": "feature 5 \u003c= 16.0", "weight": 1}, {"from": "feature 3 \u003c= 475.5", "to": "feature 5 \u003e 16.0", "weight": 1}, {"from": "feature 5 \u003c= 16.0", "to": "feature 0 \u003c= 60.5", "weight": 1}, {"from": "feature 5 \u003c= 16.0", "to": "feature 0 \u003e 60.5", "weight": 1}, {"from": "feature 0 \u003c= 60.5", "to": "Predict: 0.0", "weight": 1}, {"from": "feature 0 \u003e 60.5", "to": "feature 3 \u003c= 122.5", "weight": 1}, {"from": "feature 0 \u003e 60.5", "to": "feature 3 \u003e 122.5", "weight": 1}, {"from": "feature 0 \u003e 60.5", "to": "Predict: 1.0", "weight": 1}, {"from": "feature 3 \u003c= 122.5", "to": "Predict: 0.0", "weight": 1}, {"from": "feature 3 \u003e 122.5", "to": "feature 3 \u003c= 205.5", "weight": 1}, {"from": "feature 3 \u003e 122.5", "to": "feature 3 \u003e 205.5", "weight": 1}, {"from": "feature 3 \u003c= 205.5", "to": "Predict: 0.0", "weight": 1}, {"from": "feature 3 \u003e 205.5", "to": "Predict: 1.0", "weight": 1}, {"from": "feature 5 \u003e 16.0", "to": "feature 3 \u003c= 159.5", "weight": 1}, {"from": "feature 5 \u003e 16.0", "to": "feature 3 \u003e 159.5", "weight": 1}, {"from": "feature 3 \u003c= 159.5", "to": "Predict: 0.0", "weight": 1}, {"from": "feature 3 \u003e 159.5", "to": "feature 5 \u003c= 192.5", "weight": 1}, {"from": "feature 3 \u003e 159.5", "to": "feature 5 \u003e 192.5", "weight": 1}, {"from": "feature 5 \u003c= 192.5", "to": "feature 5 \u003c= 97.5", "weight": 1}, {"from": "feature 5 \u003c= 192.5", "to": "feature 5 \u003e 97.5", "weight": 1}, {"from": "feature 5 \u003c= 97.5", "to": "Predict: 1.0", "weight": 1}, {"from": "feature 5 \u003e 97.5", "to": "Predict: 0.0", "weight": 1}, {"from": "feature 5 \u003e 97.5", "to": "feature 0 \u003c= 58.5", "weight": 1}, {"from": "feature 5 \u003e 97.5", "to": "feature 0 \u003e 58.5", "weight": 1}, {"from": "feature 5 \u003e 192.5", "to": "Predict: 0.0", "weight": 1}, {"from": "feature 3 \u003e 475.5", "to": "feature 3 \u003c= 679.0", "weight": 1}, {"from": "feature 3 \u003e 475.5", "to": "feature 3 \u003e 679.0", "weight": 1}, {"from": "feature 3 \u003c= 679.0", "to": "feature 5 \u003c= 8.5", "weight": 1}, {"from": "feature 3 \u003c= 679.0", "to": "feature 5 \u003e 8.5", "weight": 1}, {"from": "feature 5 \u003c= 8.5", "to": "feature 0 \u003c= 60.5", "weight": 1}, {"from": "feature 5 \u003c= 8.5", "to": "feature 0 \u003e 60.5", "weight": 1}, {"from": "feature 5 \u003e 8.5", "to": "feature 5 \u003c= 97.5", "weight": 1}, {"from": "feature 5 \u003e 8.5", "to": "feature 5 \u003e 97.5", "weight": 1}, {"from": "feature 0 \u003c= 58.5", "to": "Predict: 0.0", "weight": 1}, {"from": "feature 0 \u003e 58.5", "to": "Predict: 1.0", "weight": 1}, {"from": "feature 3 \u003e 679.0", "to": "feature 3 \u003c= 900.0", "weight": 1}, {"from": "feature 3 \u003e 679.0", "to": "feature 3 \u003e 900.0", "weight": 1}, {"from": "feature 3 \u003c= 900.0", "to": "feature 5 \u003c= 2.5", "weight": 1}, {"from": "feature 3 \u003c= 900.0", "to": "feature 5 \u003e 2.5", "weight": 1}, {"from": "feature 5 \u003c= 2.5", "to": "Predict: 0.0", "weight": 1}, {"from": "feature 5 \u003e 2.5", "to": "Predict: 1.0", "weight": 1}, {"from": "feature 3 \u003e 900.0", "to": "Predict: 1.0", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
